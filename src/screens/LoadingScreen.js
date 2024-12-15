@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { View, Animated, Easing, Image } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import { useFirebase } from "../contexts/FirebaseContext";
-import { requestUserLocationPermission } from "../Utils";
 const UberLogo = require("../assets/uber_logo_white.webp");
 
 const LoadingScreen = ({ navigation }) => {
@@ -19,9 +18,8 @@ const LoadingScreen = ({ navigation }) => {
     }).start();
   });
 
-  useEffect(async () => {
+  useEffect(() => {
     console.log("App loading");
-    await requestUserLocationPermission();
     setLoading(false);
   }, []);
 
