@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { KeyboardAvoidingView, Platform } from "react-native";
 import { LogBox } from "react-native";
 import { useReduxDevToolsExtension } from "@react-navigation/devtools";
@@ -13,7 +13,7 @@ import { APP_SCREENS } from "./constants/appConstants";
 import { FirebaseProvider } from "./contexts/FirebaseContext";
 import Store from "./store/index";
 import { appPersist } from "./store/index";
-import { loadFont } from "./Utils";
+import { loadFont, requestUserLocationPermission } from "./Utils";
 LogBox.ignoreLogs(["Async Storage has been extracted from react-native core"]);
 
 export const APP_NAME = "Uber Clone";
@@ -24,6 +24,10 @@ export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
 
   useReduxDevToolsExtension(navigationRef);
+
+  useEffect(() => {
+    requestUserLocationPermission();
+  }, []);
 
   if (fontLoaded) {
     return (
